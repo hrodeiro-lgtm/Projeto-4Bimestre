@@ -1,0 +1,38 @@
+{% extends 'dashboard.html' %}
+{% block title %}Categorias | NEXO{% endblock %}
+{% block dashboard %}
+<section class="investment-section">
+  <h1>Minhas categorias</h1>
+  <p>As categorias cadastradas aparecem como sugestões no formulário de investimentos.</p>
+  {% if categories %}
+  <div class="table-container">
+    <table class="investment-table">
+      <thead><tr><th>Nome</th><th>Ações</th></tr></thead>
+      <tbody>
+        {% for item in categories %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>
+            <form method="post" action="{{ url_for('categories.delete', category_id=item.id) }}" onsubmit="return confirm('Excluir esta categoria?');">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+              <button class="danger-button" type="submit">Excluir</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="empty-state">Nenhuma categoria cadastrada.</p>
+  {% endif %}
+</section>
+<section class="investment-form-card">
+  <h2>Nova categoria</h2>
+  <form method="post" action="{{ url_for('categories.index') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <div class="form-field"><label for="name">Nome</label><input id="name" name="name" maxlength="60" required></div>
+    <button class="primary-button" type="submit">Cadastrar categoria</button>
+  </form>
+</section>
+{% endblock %}

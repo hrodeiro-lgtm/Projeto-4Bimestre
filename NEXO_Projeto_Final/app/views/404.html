@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Página não encontrada | NEXO{% endblock %}
+{% block body_class %}setup-page{% endblock %}
+{% block content %}
+<main class="setup-card">
+  <div class="setup-brand">NEXO<span>.</span></div>
+  <h1>Página não encontrada</h1>
+  <a class="text-link" href="{{ url_for('home.index') }}">Voltar ao Nexo</a>
+</main>
+{% endblock %}

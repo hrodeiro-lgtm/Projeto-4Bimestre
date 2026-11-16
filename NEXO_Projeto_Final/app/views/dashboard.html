@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block body_class %}dashboard-page{% endblock %}
+{% block content %}
+<div class="site-shell">
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('home.welcome') }}">
+      <span class="brand-symbol" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span>NEXO<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="investment-actions" aria-label="Menu principal">
+      <a href="{{ url_for('home.welcome') }}">Investimentos</a>
+      <a href="{{ url_for('categories.index') }}">Categorias</a>
+      <form method="post" action="{{ url_for('auth.logout') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button type="submit" class="logout-btn">Sair</button>
+      </form>
+    </nav>
+  </header>
+  <main class="dashboard-content">
+    {% include 'messages.html' %}
+    {% block dashboard %}{% endblock %}
+  </main>
+</div>
+{% endblock %}
